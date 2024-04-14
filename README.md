@@ -3,9 +3,9 @@
 ## users Table
 
 |Column            |Type  |Options                  |
-|nickname----------|string|null: false, unique: true|
+|nickname----------|string|null: false--------------|
 |email-------------|string|null: false, unique: true|
-|encrypted_password|string|null: false, unique: true|
+|encrypted_password|string|null: false--------------|
 |family_name-------|string|null: false--------------|
 |first_name--------|string|null: false--------------|
 |family_name_kana--|string|null: false--------------|
@@ -15,7 +15,6 @@
 ### Association
 has_many :items
 has_many :orders
-has_many :comments
 
 <!-- #email.passwordはGemを使用 -->
 
@@ -36,7 +35,6 @@ has_many :comments
 ### Association
 belongs_to :user
 has_one :order
-has_many :comments
 
 <!-- #imageはGemを使用 -->
 
