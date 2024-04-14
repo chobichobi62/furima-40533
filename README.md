@@ -4,6 +4,7 @@
 
 |Column            |Type  |Options                  |
 |nickname----------|string|null: false, unique: true|
+|email-------------|string|null: false, unique: true|
 |encrypted_password|string|null: false, unique: true|
 |family_name-------|string|null: false--------------|
 |first_name--------|string|null: false--------------|
@@ -23,11 +24,12 @@ has_many :comments
 
 |Column            |Type      |Options                       |
 |user--------------|references|null: false, foreign_key: true|
+|item_name---------|string----|null: false-------------------|
 |description-------|text------|null: false-------------------|
 |category_id-------|integer---|null: false-------------------|
 |item_condition_id-|integer---|null: false-------------------|
 |delivery_price_id-|integer---|null: false-------------------|
-|shipping_source_id|integer---|null: false-------------------|
+|region_id---------|integer---|null: false-------------------|
 |delivery_time_id--|integer---|null: false-------------------|
 |price-------------|integer---|null: false-------------------|
 
@@ -64,15 +66,3 @@ has_one :payment
 
 ### Association
 belongs_to :order
-
-
-
-## comments Table
-|Column|Type      |Options                       |
-|user--|references|null: false, foreign_key: true|
-|item--|references|null: false, foreign_key: true|
-|text--|text      |null: false-------------------|
-
-### Association
-belongs_to :user
-belongs_to :item
