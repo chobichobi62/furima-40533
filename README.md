@@ -56,7 +56,7 @@ has_one :payment
 |Column            |Type      |Options                       |
 |order---------|references|null: false, foreign_key: true|
 |post_code-----|string----|null: false-------------------|
-|region_id----|integer---|null: false-------------------|
+|region_id-----|integer---|null: false-------------------|
 |city----------|string----|null: false-------------------|
 |street_address|string----|null: false-------------------|
 |build_address-|string----|
