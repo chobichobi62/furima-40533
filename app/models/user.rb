@@ -5,7 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/}
   validates :password_confirmation, presence: true
   # 全角ひらがな、全角カタカナ、漢字
   validates :family_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
