@@ -2,6 +2,14 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
+  has_one_attached :image
+
+# 画像の有無でバリデーションを行うか条件分岐
+  validates :image, presence: true, unless: :was_attached?
+
+  def was_attached?
+    self.image.attached?
+  end
 
   #アクティブハッシュとのアソシエーション
   belongs_to :category
@@ -26,10 +34,10 @@ class Item < ApplicationRecord
   validates :price, presence: true
 
 #ジャンルの選択が「---」の時は保存できないようにする
-  validates :category_id,numericality: { other_than: 1, message: "can't be blank"} 
-  validates :item_condition_id,numericality: { other_than: 1, message: "can't be blank"} 
-  validates :delivery_price_id,numericality: { other_than: 1, message: "can't be blank"} 
-  validates :region_id,numericality: { other_than: 1, message: "can't be blank"} 
-  validates :delivery_time_id,numericality: { other_than: 1, message: "can't be blank"} 
+  validates :category_id,numericality: { other_than: 0, message: "can't be blank"} 
+  validates :item_condition_id,numericality: { other_than: 0, message: "can't be blank"} 
+  validates :delivery_price_id,numericality: { other_than: 0, message: "can't be blank"} 
+  validates :region_id,numericality: { other_than: 0, message: "can't be blank"} 
+  validates :delivery_time_id,numericality: { other_than: 0, message: "can't be blank"} 
 
 end
