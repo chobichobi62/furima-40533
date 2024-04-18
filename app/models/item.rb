@@ -14,16 +14,16 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   #空の投稿は保存できないようにする
-  validates :user_id
-  validates :image
-  validates :item_name
-  validates :description
-  validates :category_id
-  validates :item_condition_id
-  validates :delivery_price_id
-  validates :region_id
-  validates :delivery_time_id
-  validates :price
+  validates :user_id, presence: true
+  validates :image, presence: true
+  validates :item_name, presence: true
+  validates :description, presence: true
+  validates :category_id, presence: true
+  validates :item_condition_id, presence: true
+  validates :delivery_price_id, presence: true
+  validates :region_id, presence: true
+  validates :delivery_time_id, presence: true
+  validates :price, presence: true
 
 #ジャンルの選択が「---」の時は保存できないようにする
   validates :category_id,numericality: { other_than: 1, message: "can't be blank"} 
@@ -31,5 +31,5 @@ class Item < ApplicationRecord
   validates :delivery_price_id,numericality: { other_than: 1, message: "can't be blank"} 
   validates :region_id,numericality: { other_than: 1, message: "can't be blank"} 
   validates :delivery_time_id,numericality: { other_than: 1, message: "can't be blank"} 
-  
+
 end
