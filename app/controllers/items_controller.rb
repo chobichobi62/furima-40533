@@ -43,7 +43,7 @@ class ItemsController < ApplicationController
       @item.destroy
       redirect_to root_path
     else
-      render :show
+      render :show, status: :unprocessable_entity
     end
   end
 
