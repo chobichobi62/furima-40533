@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   # 重複処理をまとめる
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -25,8 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return unless current_user != @item.user
-
+  return unless current_user != @item.user
     redirect_to root_path
   end
 
@@ -35,6 +34,15 @@ class ItemsController < ApplicationController
       redirect_to item_path
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @item.user_id == current_user.id
+       @item.destroy
+       redirect_to root_path
+    else
+      render :show
     end
   end
 
