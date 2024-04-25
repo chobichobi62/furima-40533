@@ -11,8 +11,8 @@ class OrderForm
   validates :region_id, numericality: { other_than: 0, message: "can't be blank" }
   validates :city
   validates :street_address
-  validates :build_address
-  validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is inbalid' }
+  validates :build_address, allow_blank: true
+  validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
   end
 
   def save
