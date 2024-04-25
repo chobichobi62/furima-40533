@@ -5,8 +5,8 @@ class CreatePayments < ActiveRecord::Migration[7.0]
       t.string     :postcode,      null: false
       t.integer    :region_id,     null: false
       t.string     :city,          null:false
-      t.string     :street_adress, null:false
-      t.string     :build_adress
+      t.string     :street_address, null:false
+      t.string     :build_address
       t.string     :phone_number,  null:false
       t.timestamps
     end

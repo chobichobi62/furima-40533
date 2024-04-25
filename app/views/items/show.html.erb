@@ -32,7 +32,7 @@
     <%= link_to "削除", item_path, data: {turbo_method: :delete}, class:"item-destroy" %>
 <%# 自身が出品していない販売中商品の場合にのみ、「購入画面に進む」ボタンを表示 %>
 <% else %>
-    <%= link_to "購入画面に進む", "#" , data: { turbo: false }, class:"item-red-btn"%>
+    <%= link_to "購入画面に進む", item_orders_path(@item), data: { turbo: false }, class:"item-red-btn"%>
   <% end %>
 <% end %>
 
