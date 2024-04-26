@@ -18,8 +18,13 @@ payjp.createToken(numberElement).then(function (response) {
     const renderDom = document.getElementById("charge-form");
     const tokenObj = `<input value=${token} name='token' type="hidden">`;
     renderDom.insertAdjacentHTML("beforeend", tokenObj);
-    console.log(token)
   }
+  //クレジット情報の削除
+  numberElement.clear();
+      expiryElement.clear();
+      cvcElement.clear();
+      //フォームの情報をサーバーサイドに送信
+      document.getElementById("charge-form").submit();
 });
     //フォーム送信処理をキャンセル
     e.preventDefault();
