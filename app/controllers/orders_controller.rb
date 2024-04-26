@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   def index
     @order_form = OrderForm.new
     @item = Item.find(params[:item_id])
-    render 'devise/orders/index'
+    render 'orders/index'
   end
 
   def create
