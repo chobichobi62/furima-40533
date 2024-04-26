@@ -1,6 +1,6 @@
 class OrderForm
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postcode, :region_id, :city, :street_address, :build_address, :phone_number
+  attr_accessor :user_id, :item_id, :postcode, :region_id, :city, :street_address, :build_address, :phone_number, :token
 
   with_options presence: true do
   #orderモデルバリデーション
@@ -13,13 +13,14 @@ class OrderForm
   validates :street_address
   validates :build_address, allow_blank: true
   validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
+  validates :token, presence: true
   end
 
   def save
-    # 寄付情報を保存し、変数donationに代入する
+    # 寄付情報を保存し、変数orderに代入する
     order = Order.create(item_id: item_id, user_id: user_id)
     # 住所を保存する
-    # donation_idには、変数donationのidと指定する
+
     Payment.create(postcode: postcode, region_id: region_id, city: city, street_address: street_address, build_address: build_address, phone_number: phone_number)
   end
 end
