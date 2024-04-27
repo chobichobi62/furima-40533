@@ -8,11 +8,12 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image.variant(resize: '500x500') ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# <div class="sold-out"> %>
-        <%# <span>Sold Out!!</span> %>
-      <%# </div> %>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <%# 商品が売れている場合は、sold out %>
+                 <% if @item.order != nil %>
+      <div class="sold-out">
+        <span>Sold Out!!</span>
+      </div>
+      <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -26,16 +27,19 @@
 <%# ログイン中であれば表示 %>
   <% if user_signed_in? %> 
 <%# 自身が出品した販売中商品の場合のみ、編集・削除を表示%>
+<% if user_signed_in? && @item.order.nil? %>
 <% if current_user.id == @item.user_id %>
     <%= link_to "商品の編集",edit_item_path(@item), method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", item_path, data: {turbo_method: :delete}, class:"item-destroy" %>
-<%# 自身が出品していない販売中商品の場合にのみ、「購入画面に進む」ボタンを表示 %>
+<%# 自身が出品していない販売中商品、Souldout以外に、「購入画面に進む」ボタンを表示 %>
 <% else %>
+<% if @item.order.nil? %>
     <%= link_to "購入画面に進む", item_orders_path(@item), data: { turbo: false }, class:"item-red-btn"%>
   <% end %>
 <% end %>
-
+<% end %>
+<% end %>
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>
