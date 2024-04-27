@@ -1,17 +1,17 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create, :redirect_if_owner, :redirect_if_sold_out]
   before_action :redirect_if_owner, only: [:index, :create]
   before_action :redirect_if_sold_out, only: [:index, :create]
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_form = OrderForm.new
-    @item = Item.find(params[:item_id])
     render 'orders/index'
   end
 
   def create
     @order_form = OrderForm.new(order_params)
-    @item = Item.find(params[:item_id])
     if @order_form.valid?
       pay_item
       @order_form.save
@@ -39,16 +39,18 @@ class OrdersController < ApplicationController
   end
 
   def redirect_if_owner
-    @item = Item.find(params[:item_id])
     return unless current_user.id == @item.user_id
 
     redirect_to root_path
   end
 
   def redirect_if_sold_out
-    @item = Item.find(params[:item_id])
     return unless @item.order.present?
 
     redirect_to root_path
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end

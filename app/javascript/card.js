@@ -1,5 +1,6 @@
 const pay = () => {
-  const payjp = Payjp('pk_test_d63181d6155a45bed28aca71')
+  const publicKey = gon.public_key
+  const payjp = Payjp(publicKey) // PAY.JPテスト公開鍵
   const form = document.getElementById('charge-form')
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
@@ -32,3 +33,4 @@ payjp.createToken(numberElement).then(function (response) {
 };
 
 window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);

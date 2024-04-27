@@ -13,15 +13,13 @@ class OrderForm
     validates :street_address
     validates :build_address, allow_blank: true
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
-    validates :token, presence: true
+    validates :token
   end
 
   def save
     # 寄付情報を保存し、変数orderに代入する
-    order = Order.create(item_id:, user_id:)
-    # 住所を保存する
-
+    order = Order.create(item_id: item_id, user_id: user_id)
     Payment.create(postcode:, region_id:, city:, street_address:,
-                   build_address:, phone_number:)
+                   build_address:, phone_number:, order_id:)
   end
 end
