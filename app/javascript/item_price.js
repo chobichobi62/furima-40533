@@ -1,4 +1,4 @@
-window.addEventListener('turbo:load', () => {
+const calculateProfit = () => {
    const priceInput = document.getElementById("item-price");
    priceInput.addEventListener("input", () => {
    const inputValue = priceInput.value;
@@ -9,4 +9,6 @@ window.addEventListener('turbo:load', () => {
    // 販売利益を計算する処理
    ProfitDom.innerHTML = Math.floor(priceInput.value - Math.floor(priceInput.value * 0.1 ))
    })
-});
+}
+window.addEventListener('turbo:load', calculateProfit);
+window.addEventListener('turbo:render', calculateProfit);

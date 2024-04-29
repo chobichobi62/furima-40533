@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_form = OrderForm.new(order_params)
     if @order_form.valid?
       pay_item
@@ -40,13 +41,11 @@ class OrdersController < ApplicationController
 
   def redirect_if_owner
     return unless current_user.id == @item.user_id
-
     redirect_to root_path
   end
 
   def redirect_if_sold_out
     return unless @item.order.present?
-
     redirect_to root_path
   end
 

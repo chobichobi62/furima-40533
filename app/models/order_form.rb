@@ -19,7 +19,13 @@ class OrderForm
   def save
     # 寄付情報を保存し、変数orderに代入する
     order = Order.create(item_id: item_id, user_id: user_id)
-    Payment.create(postcode:, region_id:, city:, street_address:,
-                   build_address:, phone_number:, order_id:)
+    Payment.create(postcode: postcode,
+    region_id: region_id,
+    city: city,
+    street_address: street_address,
+    build_address: build_address,
+    phone_number: phone_number,
+    order_id: order.id
+    )
   end
 end
